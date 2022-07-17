@@ -6,7 +6,7 @@ module.exports = {
   theme: {
     extend: {
       width: {
-        '128': '40rem',
+        '128': '44rem',
       },
       fontFamily :{
         'quicksand': 'Quicksand',
