@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Quote from "./Quote";
 function App() {
 
   useEffect(()=>{
     getQuote();
-  })
-
+  },[])
+  const [quote,setQuote] = useState([]);
   const options = {
     method: 'GET',
     headers: {
@@ -16,14 +16,20 @@ function App() {
   
   const getQuote = async () =>{
 
-      const api = await fetch('https://famous-quotes4.p.rapidapi.com/random?category=all&count=2', options);
-      const data = await api.json();
 
+      const api = await fetch('https://famous-quotes4.p.rapidapi.com/random?category=all&count=1', options);
+      const data = await api.json();
+      setQuote(data[0])
+      
       console.log(data);
   }
   return (
     <div className="flex flex-col items-center pt-36 bg-yellow-100 h-screen">
-      <Quote/>
+      <Quote
+        quote = {quote.text}
+        author = {quote.author}
+        onAdd = {getQuote}
+      />
     </div>
   );
 }
